@@ -5,7 +5,8 @@ public class Main {
 		
 		//Ventana ventana = new Ventana("Acceso");
 		//Calculadora calculadora = new Calculadora("Calculadora");
-		MenuBar menu = new MenuBar("Ejemplo menu");
+		//MenuBar menu = new MenuBar("Ejemplo menu");
+		CalculadoraGridLayout layout = new CalculadoraGridLayout("Ejemplo gridlayout");
 	}
 
 }

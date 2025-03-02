@@ -2,8 +2,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +18,7 @@ public class ActividadLayout extends JFrame{
     Font fuente = new Font("Consolas", Font.BOLD, 20);
     
     public ActividadLayout(String title) {
+    	
     	this.setTitle("Calculadora");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 400);
@@ -29,7 +33,16 @@ public class ActividadLayout extends JFrame{
         
         this.repaint();
         this.setVisible(true);
+        setIconImage(getIconImage());
+      
     }
+    
+    public Image getIconImage() {
+    	   Image retValue = Toolkit.getDefaultToolkit().
+    	         getImage(ClassLoader.getSystemResource("eye.png"));
+
+    	   return retValue;
+    	}
     
     public JPanel top() {
         JPanel principal = new JPanel();

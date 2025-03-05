@@ -12,6 +12,9 @@ import java.awt.Image;
 import java.awt.Label;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -276,4 +279,5 @@ public class PrimerDiseno extends JFrame {
 		btnNewButton_2_2.setBounds(76, 41, 128, 50);
 		panel_4.add(btnNewButton_2_2);
 	}
+	
 }

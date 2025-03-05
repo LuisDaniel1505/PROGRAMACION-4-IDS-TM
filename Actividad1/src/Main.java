@@ -8,6 +8,7 @@ public class Main {
 		//MenuBar menu = new MenuBar("Ejemplo menu");
 		//CalculadoraGridLayout layout = new CalculadoraGridLayout("Ejemplo gridlayout");
 		ActividadLayout layout = new ActividadLayout("Interés");
+		//GraphicsPrueba prueba = new GraphicsPrueba();
 	}
 
 }

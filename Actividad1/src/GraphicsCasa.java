@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class GraphicsCasa extends JFrame {
     
     public GraphicsCasa(String title) {
-        this.setTitle("Casa");
+        this.setTitle("Casa con graphics");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
         this.setResizable(false);

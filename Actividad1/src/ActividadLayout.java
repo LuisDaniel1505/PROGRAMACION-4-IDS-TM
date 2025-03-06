@@ -71,6 +71,8 @@ public class ActividadLayout extends JFrame{
 		
 		g2.drawPolygon(xs2,ys2,3);
 		
+		g2.fillPolygon(xs2,ys2,3);
+		
 	}
     /*
     public Image getIconImage() {

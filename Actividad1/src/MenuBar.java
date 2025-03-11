@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -126,18 +128,18 @@ public class MenuBar extends JFrame {
         etiqueta2.setHorizontalAlignment(JLabel.CENTER);
         login.add(etiqueta2);
         
+        /*
        	JLabel etiqueta5 = new JLabel();
-        ImageIcon imagen4 = new ImageIcon("imagenes/user2.png");
-        etiqueta5.setIcon(imagen4);
+        //ImageIcon imagen4 = new ImageIcon("imagenes/user2.png");
+        //etiqueta5.setIcon(imagen4);
         etiqueta5.setBounds(270, 150, 30, 30);
         etiqueta5.setBackground(new Color(59, 53, 79));
-        Image img2 = imagen4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        etiqueta5.setIcon(new ImageIcon(img2));
+        //Image img2 = imagen4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        //etiqueta5.setIcon(new ImageIcon(img2));
         etiqueta5.setOpaque(true);
         login.add(etiqueta5);
-        
-        CampoTextoConPlaceholder email = new CampoTextoConPlaceholder(15);
-        email.setPlaceholder("Ingresa tu email");
+        */
+        JTextField email = new JTextField(null);
         email.setBounds(40, 150, 270, 30);
         email.setBackground(new Color(59, 53, 79));
         email.setFont(etiquetas);
@@ -153,17 +155,17 @@ public class MenuBar extends JFrame {
         login.add(etiqueta4);
         
         JLabel etiqueta3 = new JLabel();
-        ImageIcon imagen3 = new ImageIcon("imagenes/eye.png");
-        etiqueta3.setIcon(imagen3);
+        //ImageIcon imagen3 = new ImageIcon("imagenes/eye.png");
+        //etiqueta3.setIcon(imagen3);
         etiqueta3.setBounds(270, 220, 30, 30);
         etiqueta3.setBackground(new Color(59, 53, 79));
-        Image img = imagen3.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        etiqueta3.setIcon(new ImageIcon(img));
+       // Image img = imagen3.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        //etiqueta3.setIcon(new ImageIcon(img));
         etiqueta3.setOpaque(true);
         login.add(etiqueta3);
         
-        CampoContraseñaConPlaceholder password = new CampoContraseñaConPlaceholder (15);
-        password.setPlaceholder("Ingresa tu contraseña");
+        JPasswordField password = new JPasswordField (15);
+        //password.setPlaceholder("Ingresa tu contraseña");
         password.setBounds(40, 220, 270, 30);
         password.setBackground(new Color(59, 53, 79));
         password.setFont(etiquetas);
@@ -195,6 +197,21 @@ public class MenuBar extends JFrame {
         access.setFont(fuente2);
         access.setForeground(Color.WHITE);
         login.add(access);
+        
+        access.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					System.out.println("Hola");
+					if(email.getText().equals("")) {
+						email.setBorder(BorderFactory.createLineBorder(Color.red));
+					}else {
+						email.setBorder(BorderFactory.createLineBorder(Color.green));
+					}
+					System.out.println(email.getText());
+				}
+			});
 
         BotonRedondeado createAcc = new BotonRedondeado("Crea una cuenta");
         createAcc.setBounds(40, 360, 270, 35);

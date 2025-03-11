@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -37,19 +39,19 @@ public class Ventana extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(null);  
-        JPanel leftPanel = leftSide();
+        //JPanel leftPanel = leftSide();
         JPanel loginPanel = login();
 
-        leftPanel.setLocation(0, 0);
-        leftPanel.setSize(400, 500);
+       // leftPanel.setLocation(0, 0);
+       // leftPanel.setSize(400, 500);
 
         loginPanel.setLocation(400, 0);
         loginPanel.setSize(400, 500);
 
         this.setResizable(false);
-        this.add(leftPanel);
+        //this.add(leftPanel);
         this.add(loginPanel);
-        //this.add(this.registro());
+        this.add(this.registro());
         //this.add(this.tabla());
         this.setVisible(true);
 
@@ -58,7 +60,7 @@ public class Ventana extends JFrame {
         
         
     }
-
+/*
     public JPanel leftSide() {
         JPanel leftSide = new JPanel(null);
         leftSide.setBackground(new Color(43, 39, 56));
@@ -71,7 +73,7 @@ public class Ventana extends JFrame {
         leftSide.add(redondeado);
         return leftSide;
     }
-
+*/
     public JPanel login() {
         JPanel login = new JPanel(null);
         login.setBackground(new Color(43, 39, 56));
@@ -103,8 +105,7 @@ public class Ventana extends JFrame {
         etiqueta5.setOpaque(true);
         login.add(etiqueta5);
         
-        CampoTextoConPlaceholder email = new CampoTextoConPlaceholder(15);
-        email.setPlaceholder("Ingresa tu email");
+        JTextField email = new JTextField(null);
         email.setBounds(40, 150, 270, 30);
         email.setBackground(new Color(59, 53, 79));
         email.setFont(etiquetas);
@@ -129,8 +130,8 @@ public class Ventana extends JFrame {
         etiqueta3.setOpaque(true);
         login.add(etiqueta3);
         
-        CampoContraseñaConPlaceholder password = new CampoContraseñaConPlaceholder (15);
-        password.setPlaceholder("Ingresa tu contraseña");
+        JPasswordField password = new JPasswordField (15);
+        //password.setPlaceholder("Ingresa tu contraseña");
         password.setBounds(40, 220, 270, 30);
         password.setBackground(new Color(59, 53, 79));
         password.setFont(etiquetas);
@@ -168,9 +169,189 @@ public class Ventana extends JFrame {
         createAcc.setFont(etiquetas);
         createAcc.setHorizontalAlignment(JLabel.CENTER);
         login.add(createAcc);
+        
+        access.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+					if(email.getText().equals("")) {
+						email.setBorder(BorderFactory.createLineBorder(Color.red));
+					}else {
+						email.setBorder(BorderFactory.createLineBorder(Color.green));
+					}
+					System.out.println(email.getText());
+				}
+			});
+        
+        access.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               
+                String passText = new String(password.getPassword());
+                
+               
+                if (passText.equals("")) {
+                    password.setBorder(BorderFactory.createLineBorder(Color.red));  
+                } else {
+                    password.setBorder(BorderFactory.createLineBorder(Color.green));  
+                }
+            }
+        });
+        
+        
 
         return login;
     }
+public JPanel registro() {
+		
+		JPanel registro = new JPanel();
+		registro.setLocation(0,0);
+		registro.setOpaque(true);
+		registro.setSize(400,600);
+		registro.setBackground(new Color(235, 235, 235));
+		registro.setVisible(true);
+		registro.setLayout(null);
+		this.add(registro);
+		
+		JLabel etiqueta1 = new JLabel("Registro");
+		etiqueta1.setSize(245, 30);
+		etiqueta1.setLocation(70, 20);
+		etiqueta1.setBackground(new Color(235, 235, 235));
+		etiqueta1.setOpaque(true);
+		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		//etiqueta1.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.blue));
+		etiqueta1.setFont(etiquetas);
+		registro.add(etiqueta1);
+		
+		JLabel etiqueta2 = new JLabel("Nombre de usuario");
+		etiqueta2.setBounds(95, 60, 180, 30);
+		etiqueta2.setFont(etiquetas);
+		etiqueta2.setHorizontalAlignment(JLabel.CENTER);
+		registro.add(etiqueta2);
+		
+		JTextField email = new JTextField();
+		email.setBounds(15, 90, 370, 30);
+		email.setBackground(new Color(255, 255, 255));
+		email.setOpaque(true);
+		email.setFont(etiquetas);
+		registro.add(email);
+		registro.revalidate();
+		
+		JLabel etiqueta3 = new JLabel("Cuentanos sobre ti");
+		etiqueta3.setBounds(95, 120, 180, 30);
+		etiqueta3.setFont(etiquetas);
+		etiqueta3.setHorizontalAlignment(JLabel.CENTER);
+		registro.add(etiqueta3);
+		
+		JTextArea biografia = new JTextArea();
+		biografia.setBounds(15, 150, 370, 70);
+		biografia.setBackground(new Color(255, 255, 255));
+		biografia.setOpaque(true);
+		biografia.setFont(etiquetas);
+		biografia.setBorder(BorderFactory.createLineBorder(Color.black));
+		registro.add(biografia);
+		registro.revalidate();
+		
+		JLabel etiqueta4 = new JLabel("Preferencias");
+		etiqueta4.setBounds(95, 225, 180, 30);
+		etiqueta4.setFont(etiquetas);
+		etiqueta4.setHorizontalAlignment(JLabel.CENTER);
+		registro.add(etiqueta4);
+		
+		JCheckBox recordar = new JCheckBox("Dulce");
+		recordar.setBounds(18,255, 99,20);
+		recordar.setBackground(new Color(235, 235, 235));
+		recordar.setVisible(true);
+		registro.add(recordar);
+		
+		JCheckBox salado = new JCheckBox("Salado");
+		salado.setBounds(150,255, 99,20);
+		salado.setBackground(new Color(235, 235, 235));
+		salado.setVisible(true);
+		registro.add(salado);
+		
+		JCheckBox saludable = new JCheckBox("Saludable");
+		saludable.setBounds(300,255, 99,20);
+		saludable.setBackground(new Color(235, 235, 235));
+		saludable.setVisible(true);
+		registro.add(saludable);
+		
+		JLabel etiqueta5 = new JLabel("Terminos");
+		etiqueta5.setBounds(95, 270, 180, 30);
+		etiqueta5.setFont(etiquetas);
+		etiqueta5.setHorizontalAlignment(JLabel.CENTER);
+		registro.add(etiqueta5);
+
+		ButtonGroup terminos = new ButtonGroup();
+		
+		JRadioButton aceptar = new JRadioButton("Acepto los términos",true);
+		aceptar.setBounds(18,300,140,20);
+		registro.add(aceptar);
+		
+		JRadioButton aceptar2 = new JRadioButton("No acepto los términos");
+		aceptar2.setBounds(210,300,180,20);
+		registro.add(aceptar2);
+		
+		terminos.add(aceptar);
+		terminos.add(aceptar2);
+		
+		String [] colonias = {"Los Olivos", "Miramar", "Santa Fe","Pedregal"};
+		JComboBox colonia = new JComboBox(colonias);
+		colonia.setBounds(18,340,370,30);
+		colonia.setBackground(new Color(255, 255, 255));
+		colonia.setVisible(true);
+		registro.add(colonia);
+		
+		JButton acceso = new JButton("Crear cuenta");
+		acceso.setBounds(80, 390, 230, 45);
+		acceso.setHorizontalAlignment(JLabel.CENTER);
+		acceso.setBackground(new Color(15, 62, 234));
+		Font fuente2 = new Font("arial", 40, 20);
+		acceso.setFont(fuente2); 
+		acceso.setForeground(Color.WHITE);
+		registro.add(acceso);
+	
+		registro.revalidate();
+        
+		acceso.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+					if(email.getText().equals("")) {
+						email.setBorder(BorderFactory.createLineBorder(Color.red));
+
+					}else {
+						email.setBorder(BorderFactory.createLineBorder(Color.green));
+					}
+					System.out.println(email.getText());
+				}
+			});
+		
+		acceso.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+					if(biografia.getText().equals("")) {
+						biografia.setBorder(BorderFactory.createLineBorder(Color.red));
+					}else {
+						biografia.setBorder(BorderFactory.createLineBorder(Color.green));
+					}
+					System.out.println(biografia.getText());
+				}
+			});
+		
+		
+		return registro;
+		
+		
+		
+	}
 
 
     class imagenRedondeada extends JPanel {
@@ -340,137 +521,7 @@ public class Ventana extends JFrame {
 	
 	return rightSide;
 	
-}
-
-	public JPanel registro() {
-		
-		JPanel registro = new JPanel();
-		registro.setLocation(0,0);
-		registro.setOpaque(true);
-		registro.setSize(400,600);
-		registro.setBackground(new Color(235, 235, 235));
-		registro.setVisible(true);
-		registro.setLayout(null);
-		this.add(registro);
-		
-		JLabel etiqueta1 = new JLabel("Registro");
-		etiqueta1.setSize(245, 30);
-		etiqueta1.setLocation(70, 20);
-		etiqueta1.setBackground(new Color(235, 235, 235));
-		etiqueta1.setOpaque(true);
-		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
-		//etiqueta1.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.blue));
-		etiqueta1.setFont(etiquetas);
-		registro.add(etiqueta1);
-		
-		JLabel etiqueta2 = new JLabel("Nombre de usuario");
-		etiqueta2.setBounds(95, 60, 180, 30);
-		etiqueta2.setFont(etiquetas);
-		etiqueta2.setHorizontalAlignment(JLabel.CENTER);
-		registro.add(etiqueta2);
-		
-		JTextField email = new JTextField();
-		email.setBounds(15, 90, 370, 30);
-		email.setBackground(new Color(255, 255, 255));
-		email.setOpaque(true);
-		email.setFont(etiquetas);
-		registro.add(email);
-		registro.revalidate();
-		
-		JLabel etiqueta3 = new JLabel("Cuentanos sobre ti");
-		etiqueta3.setBounds(95, 120, 180, 30);
-		etiqueta3.setFont(etiquetas);
-		etiqueta3.setHorizontalAlignment(JLabel.CENTER);
-		registro.add(etiqueta3);
-		
-		JTextArea biografia = new JTextArea();
-		biografia.setBounds(15, 150, 370, 70);
-		biografia.setBackground(new Color(255, 255, 255));
-		biografia.setOpaque(true);
-		biografia.setFont(etiquetas);
-		biografia.setBorder(BorderFactory.createLineBorder(Color.black));
-		registro.add(biografia);
-		registro.revalidate();
-		
-		JLabel etiqueta4 = new JLabel("Preferencias");
-		etiqueta4.setBounds(95, 225, 180, 30);
-		etiqueta4.setFont(etiquetas);
-		etiqueta4.setHorizontalAlignment(JLabel.CENTER);
-		registro.add(etiqueta4);
-		
-		JCheckBox recordar = new JCheckBox("Dulce");
-		recordar.setBounds(18,255, 99,20);
-		recordar.setBackground(new Color(235, 235, 235));
-		recordar.setVisible(true);
-		registro.add(recordar);
-		
-		JCheckBox salado = new JCheckBox("Salado");
-		salado.setBounds(150,255, 99,20);
-		salado.setBackground(new Color(235, 235, 235));
-		salado.setVisible(true);
-		registro.add(salado);
-		
-		JCheckBox saludable = new JCheckBox("Saludable");
-		saludable.setBounds(300,255, 99,20);
-		saludable.setBackground(new Color(235, 235, 235));
-		saludable.setVisible(true);
-		registro.add(saludable);
-		
-		JLabel etiqueta5 = new JLabel("Terminos");
-		etiqueta5.setBounds(95, 270, 180, 30);
-		etiqueta5.setFont(etiquetas);
-		etiqueta5.setHorizontalAlignment(JLabel.CENTER);
-		registro.add(etiqueta5);
-
-		ButtonGroup terminos = new ButtonGroup();
-		
-		JRadioButton aceptar = new JRadioButton("Acepto los términos",true);
-		aceptar.setBounds(18,300,140,20);
-		registro.add(aceptar);
-		
-		JRadioButton aceptar2 = new JRadioButton("No acepto los términos");
-		aceptar2.setBounds(210,300,180,20);
-		registro.add(aceptar2);
-		
-		terminos.add(aceptar);
-		terminos.add(aceptar2);
-		
-		String [] colonias = {"Los Olivos", "Miramar", "Santa Fe","Pedregal"};
-		JComboBox colonia = new JComboBox(colonias);
-		colonia.setBounds(18,340,370,30);
-		colonia.setBackground(new Color(255, 255, 255));
-		colonia.setVisible(true);
-		registro.add(colonia);
-		
-		JButton access = new JButton("Crear cuenta");
-		access.setBounds(80, 390, 230, 45);
-		access.setHorizontalAlignment(JLabel.CENTER);
-		access.setBackground(new Color(15, 62, 234));
-		Font fuente2 = new Font("arial", 40, 20);
-		access.setFont(fuente2); 
-		access.setForeground(Color.WHITE);
-		registro.add(access);
-		JLabel olvidar = new JLabel("¿Olvidó su contraseña?");
-		olvidar.setBounds(184,246, 150,30);
-		Font fuente1 = new Font("Arial", Font.ITALIC, 12);
-	    olvidar.setFont(fuente1); 
-		olvidar.setBackground(new Color(235, 235, 235));
-		olvidar.setOpaque(true);
-		olvidar.setFont(fuente1);
-		olvidar.setForeground(new Color(0,154,182));
-		registro.add(olvidar);
-		registro.revalidate();
-		
-		
-		
-		createAcc = new JButton("Crea una cuenta");
-		createAcc.setBounds(80, 450, 230, 45);
-		createAcc.setFont(etiquetas);
-		createAcc.setHorizontalAlignment(JLabel.CENTER);
-		registro.add(createAcc); 
-		return registro; 
-		
-	}*/
+}*/
 
 
 

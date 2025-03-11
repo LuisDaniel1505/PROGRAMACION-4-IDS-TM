@@ -440,7 +440,7 @@ public class GraphicsMario2 extends JFrame{
 	        try {
 	        	imagen2 = ImageIO.read(new File("imagenes/marioW.png"));
 	        	
-	        	g2.drawImage(imagen2,360,448,60,70,null,null);
+	        	g2.drawImage(imagen2,360,428,60,90,null,null);
 	        }catch(IOException e) {
 	        	e.printStackTrace();
 	        }

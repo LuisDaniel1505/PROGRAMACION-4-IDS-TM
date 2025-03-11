@@ -8,7 +8,9 @@ public class Main {
 		//MenuBar menu = new MenuBar("Ejemplo menu");
 		//CalculadoraGridLayout layout = new CalculadoraGridLayout("Ejemplo gridlayout");
 		//ActividadLayout layout = new ActividadLayout("Interés");
-		GraphicsCasa prueba = new GraphicsCasa("Casa");
+		//GraphicsCasa prueba = new GraphicsCasa("Casa");
+		GraphicsMario mario = new GraphicsMario("Mario");
+		GraphicsMario2 mario2 = new GraphicsMario2("Mario");
 	}
 
 }

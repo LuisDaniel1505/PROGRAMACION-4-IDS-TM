@@ -12,8 +12,8 @@ public class Main {
 		//GraphicsMario mario = new GraphicsMario("Mario");
 		//GraphicsMario2 mario2 = new GraphicsMario2("Mario");
 		//-------------Login y ventana separados para actividad de 12/03/2025---------------
-		Login login = new Login("Inicio de sesion");
-		Registro regis = new Registro("Registro");
+		//Registro regis = new Registro("Registro");
+		LoginYRegistro login = new LoginYRegistro("Inicio de sesion");
 	}
 
 }

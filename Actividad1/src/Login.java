@@ -8,11 +8,16 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
 
 public class Login extends JFrame {
@@ -21,7 +26,7 @@ public class Login extends JFrame {
 
     public Login(String title) {
         super(title);
-        this.setSize(400, 520);
+        this.setSize(400, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
@@ -30,7 +35,33 @@ public class Login extends JFrame {
         loginPanel.setBounds(0, 0, 400, 500);
         this.add(loginPanel);
 
+        JMenuBar barra = new JMenuBar();
+        JMenu menu1 = new JMenu("Archivo");
+        JMenu menu2 = new JMenu("Ayuda");
+        
+        JMenuItem op_new = new JMenuItem("Nuevo");
+        JMenuItem op_open = new JMenuItem("Abrir");
+        JMenuItem op_save = new JMenuItem("Guardar");
+        JMenuItem op_close = new JMenuItem("Cerrar");
+        
+        menu1.add(op_new);
+        menu1.add(op_save);
+        menu1.add(op_open);
+        menu1.add(op_close);
+        
+        JRadioButtonMenuItem op_help = new JRadioButtonMenuItem("Necesitas ayuda? ");
+        JCheckBoxMenuItem op_suport = new JCheckBoxMenuItem("Soporte tecnico");
+        
+        menu2.add(op_help);
+        menu2.add(op_suport);
+        
+        barra.add(menu1);
+        barra.add(menu2);
+        
+        this.setJMenuBar(barra);
+        
         this.setVisible(true);
+        
     }
 
     public JPanel login() {
@@ -122,11 +153,30 @@ public class Login extends JFrame {
         access.setForeground(Color.WHITE);
         login.add(access);
 
+        JLabel cuenta = new JLabel("¿Aun no tiene cuenta?");
+        cuenta.setBounds(40, 398, 250, 30);
+        Font fuente5 = new Font("Ginebra", Font.ITALIC, 12);
+        cuenta.setFont(fuente5);
+        cuenta.setBackground(new Color(43, 39, 56));
+        cuenta.setOpaque(true);
+        cuenta.setForeground(new Color(0, 154, 182));
+        login.add(cuenta);
+        login.revalidate();
+        
         BotonRedondeado createAcc = new BotonRedondeado("Crea una cuenta");
         createAcc.setBounds(40, 360, 270, 35);
         createAcc.setFont(etiquetas);
         createAcc.setHorizontalAlignment(JLabel.CENTER);
         login.add(createAcc);
+        
+        createAcc.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					manager();
+				}
+			});
         
         access.addActionListener(new ActionListener() {
 
@@ -182,6 +232,15 @@ public class Login extends JFrame {
 
         return login;
     }
+    
+    public void manager() {
+    	this.removeAll();
+    	//this.setContentPane();
+    	this.repaint();
+    	
+    }
 }
+
+
         
     

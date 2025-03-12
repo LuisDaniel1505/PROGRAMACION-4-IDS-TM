@@ -16,13 +16,18 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.BorderFactory;
@@ -42,7 +47,31 @@ public class Registro extends JFrame {
         this.setResizable(false);
         this.add(this.registro());
         this.setVisible(true);
+        JMenuBar barra = new JMenuBar();
+        JMenu menu1 = new JMenu("Archivo");
+        JMenu menu2 = new JMenu("Ayuda");
         
+        JMenuItem op_new = new JMenuItem("Nuevo");
+        JMenuItem op_open = new JMenuItem("Abrir");
+        JMenuItem op_save = new JMenuItem("Guardar");
+        JMenuItem op_close = new JMenuItem("Cerrar");
+        
+        menu1.add(op_new);
+        menu1.add(op_save);
+        menu1.add(op_open);
+        menu1.add(op_close);
+        
+        JRadioButtonMenuItem op_help = new JRadioButtonMenuItem("Necesitas ayuda? ");
+        JCheckBoxMenuItem op_suport = new JCheckBoxMenuItem("Soporte tecnico");
+        
+        menu2.add(op_help);
+        menu2.add(op_suport);
+        
+        barra.add(menu1);
+        barra.add(menu2);
+        
+        this.setJMenuBar(barra);
+
         
     }
 

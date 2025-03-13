@@ -48,11 +48,14 @@ public class LoginYRegistro extends JFrame {
         this.setResizable(false);
         //this.add(this.registro());
         this.add(login());
+        //this.add(this.tabla());
         this.setVisible(true);
         JMenuBar barra = new JMenuBar();
-        JMenu menu1 = new JMenu("Archivo");
+       // JMenu menu1 = new JMenu("Archivo");
         JMenu menu2 = new JMenu("Ayuda");
-        JMenu menu3 = new JMenu("Navegacion");
+        JMenu menu3 = new JMenu("Cuenta");
+        
+        JMenu menu4 = new JMenu("Usuarios");
         
         JMenuItem op_new = new JMenuItem("Nuevo");
         JMenuItem op_open = new JMenuItem("Abrir");
@@ -60,6 +63,14 @@ public class LoginYRegistro extends JFrame {
         JMenuItem op_close = new JMenuItem("Cerrar");
         JMenuItem op_login = new JMenuItem("Acceder");
         JMenuItem op_registro = new JMenuItem("Registrarse");
+        
+        JMenuItem op_consultar = new JMenuItem("Consulta");
+        JMenuItem op_alta = new JMenuItem("Alta");
+        JMenuItem op_baja = new JMenuItem("Baja");
+        
+        JMenuItem op_crear = new JMenuItem("¿Cómo crear un usuario?");
+        JMenuItem op_acceder = new JMenuItem("¿Cómo acceder al sistema?");
+        JMenuItem op_olvidar = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
         
         op_registro.addActionListener(new ActionListener() {
     		
@@ -77,23 +88,80 @@ public class LoginYRegistro extends JFrame {
 					manager("Login");
 				}
 			});
+        op_consultar.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					manager("Consulta");
+				}
+			});
+        op_alta.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					manager("Alta");
+				}
+			});
+        op_baja.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					manager("Baja");
+				}
+			});
+        op_crear.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					manager("Crear");
+				}
+			});
+        op_acceder.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					manager("Acceder");
+				}
+			});
+        op_olvidar.addActionListener(new ActionListener() {
+    		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					manager("Olvidar");
+				}
+			});
+
         
-        menu1.add(op_new);
-        menu1.add(op_save);
-        menu1.add(op_open);
-        menu1.add(op_close);
+        //menu1.add(op_new);
+       // menu1.add(op_save);
+       // menu1.add(op_open);
+       // menu1.add(op_close);
+        
+        menu4.add(op_consultar);
+        menu4.add(op_alta);
+        menu4.add(op_baja);
         
         menu3.add(op_login);
         menu3.add(op_registro);
         JRadioButtonMenuItem op_help = new JRadioButtonMenuItem("Necesitas ayuda? ");
         JCheckBoxMenuItem op_suport = new JCheckBoxMenuItem("Soporte tecnico");
         
-        menu2.add(op_help);
-        menu2.add(op_suport);
+        //menu2.add(op_help);
+        //menu2.add(op_suport);
+        menu2.add(op_crear);
+        menu2.add(op_acceder);
+        menu2.add(op_olvidar);
         
-        barra.add(menu1);
-        barra.add(menu2);
+       // barra.add(menu1);
         barra.add(menu3);
+        barra.add(menu4);
+        barra.add(menu2);
         
         this.setJMenuBar(barra);
         
@@ -438,6 +506,174 @@ public JPanel registro() {
 		
 		    return login;
 		}
+		public JPanel tabla() {
+			JPanel panel = new JPanel();
+			panel.setLocation(0,0);
+			panel.setOpaque(true);
+			panel.setSize(800,500);
+			panel.setBackground(new Color(235, 235, 235));
+			panel.setVisible(true);
+			panel.setLayout(null);
+			this.add(panel);
+			
+			
+			JLabel widget = new JLabel();
+			widget.setSize(160, 130);
+			widget.setLocation(70, 40);
+			widget.setBackground(Color.LIGHT_GRAY);
+			widget.setOpaque(true);
+			widget.setHorizontalAlignment(JLabel.CENTER);
+			//etiqueta1.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.blue));
+			widget.setFont(etiquetas);
+			panel.add(widget);
+			
+			JLabel etiqueta1 = new JLabel("Total de usuarios");
+			etiqueta1.setSize(100, 50);
+			etiqueta1.setLocation(20, 13);
+			etiqueta1.setBackground(Color.LIGHT_GRAY);
+			etiqueta1.setOpaque(true);
+			//etiqueta1.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.blue));
+			widget.add(etiqueta1);
+			
+			JLabel etiqueta2 = new JLabel("80");
+			etiqueta2.setSize(100, 50);
+			etiqueta2.setLocation(20, 80);
+			etiqueta2.setBackground(Color.LIGHT_GRAY);
+			etiqueta2.setOpaque(true);
+			etiqueta2.setHorizontalAlignment(JLabel.CENTER);
+			//etiqueta1.setBorder(BorderFactory.createEtchedBorder(Color.black, Color.blue));
+			etiqueta2.setFont(etiquetas);
+			widget.add(etiqueta2);
+			
+			JButton exportar = new JButton("Exportar");
+			exportar.setBounds(700, 100, 80, 45);
+			exportar.setHorizontalAlignment(JLabel.CENTER);
+			exportar.setBackground(new Color(15, 62, 234));
+			Font fuente2 = new Font("arial", 40, 12);
+			exportar.setFont(fuente2); 
+			exportar.setForeground(Color.WHITE);
+			panel.add(exportar);
+			
+			JButton añadir = new JButton("Añadir");
+			añadir.setBounds(610, 100, 80, 45);
+			añadir.setHorizontalAlignment(JLabel.CENTER);
+			añadir.setBackground(new Color(15, 62, 234));
+			Font fuente3 = new Font("arial", 40, 12);
+			añadir.setFont(fuente3); 
+			añadir.setForeground(Color.WHITE);
+			panel.add(añadir);
+
+			String [] columNames= {"First name", "Last name", "Game","Age", "Vegetarian"};
+			
+			Object[][] data = {
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+					{"Kathy", "smith","fubo",1995,true},
+			};
+			JTable table = new JTable(data,columNames);
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setSize(700, 200);
+			scrollPane.setLocation(30, 190);
+			
+			panel.add(scrollPane);
+			return panel;
+			
+		}
+		
+		public JPanel alta() {
+			JPanel alta = new JPanel(null);
+		    alta.setBackground(new Color(0, 0, 0));
+		    alta.setBounds(0, 0, 400, 500);
+		
+		    JLabel etiqueta1 = new JLabel("Alta");
+		    etiqueta1.setBounds(60, 40, 245, 50);
+		    etiqueta1.setBackground(new Color(43, 39, 56));
+		    etiqueta1.setOpaque(true);
+		    etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		    Font etiquetaInicio = new Font("Ginebra", Font.PLAIN, 40);
+		    etiqueta1.setFont(etiquetaInicio);
+		    etiqueta1.setForeground(Color.WHITE);
+		    alta.add(etiqueta1);
+		    
+		    return alta;
+		}
+		public JPanel baja() {
+			JPanel baja = new JPanel(null);
+		    baja.setBackground(new Color(210, 210, 210));
+		    baja.setBounds(0, 0, 400, 500);
+		
+		    JLabel etiqueta1 = new JLabel("Baja");
+		    etiqueta1.setBounds(60, 40, 245, 50);
+		    etiqueta1.setBackground(new Color(43, 39, 56));
+		    etiqueta1.setOpaque(true);
+		    etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		    Font etiquetaInicio = new Font("Ginebra", Font.PLAIN, 40);
+		    etiqueta1.setFont(etiquetaInicio);
+		    etiqueta1.setForeground(Color.WHITE);
+		    baja.add(etiqueta1);
+		    
+		    return baja;
+		}
+		public JPanel acceder() {
+			JPanel acceder = new JPanel(null);
+		    acceder.setBackground(new Color(80, 80, 80));
+		    acceder.setBounds(0, 0, 400, 500);
+		
+		    JLabel etiqueta1 = new JLabel("Como acceder al sistema");
+		    etiqueta1.setBounds(60, 40, 245, 50);
+		    etiqueta1.setBackground(new Color(43, 39, 56));
+		    etiqueta1.setOpaque(true);
+		    etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		    Font etiquetaInicio = new Font("Ginebra", Font.PLAIN, 20);
+		    etiqueta1.setFont(etiquetaInicio);
+		    etiqueta1.setForeground(Color.WHITE);
+		    acceder.add(etiqueta1);
+		    
+		    return acceder;
+		}
+		public JPanel crear() {
+			JPanel crear = new JPanel(null);
+		    crear.setBackground(new Color(0, 255, 255));
+		    crear.setBounds(0, 0, 400, 500);
+		
+		    JLabel etiqueta1 = new JLabel("Como crear un usuario");
+		    etiqueta1.setBounds(60, 40, 245, 50);
+		    etiqueta1.setBackground(new Color(43, 39, 56));
+		    etiqueta1.setOpaque(true);
+		    etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		    Font etiquetaInicio = new Font("Ginebra", Font.PLAIN, 20);
+		    etiqueta1.setFont(etiquetaInicio);
+		    etiqueta1.setForeground(Color.WHITE);
+		    crear.add(etiqueta1);
+		    
+		    return crear;
+		}
+		public JPanel olvidar() {
+			JPanel olvidar = new JPanel(null);
+		    olvidar.setBackground(new Color(50, 255, 255));
+		    olvidar.setBounds(0, 0, 400, 500);
+		
+		    JLabel etiqueta1 = new JLabel("Que pasa si olvide mi contraseña");
+		    etiqueta1.setBounds(60, 40, 245, 50);
+		    etiqueta1.setBackground(new Color(43, 39, 56));
+		    etiqueta1.setOpaque(true);
+		    etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		    Font etiquetaInicio = new Font("Ginebra", Font.PLAIN, 16);
+		    etiqueta1.setFont(etiquetaInicio);
+		    etiqueta1.setForeground(Color.WHITE);
+		    olvidar.add(etiqueta1);
+		    
+		    return olvidar;
+		}
+		
 		
 		public void manager(String target) {
 			this.getContentPane().removeAll();
@@ -446,6 +682,24 @@ public JPanel registro() {
 			}
 			if(target.equals("Login")) {
 				this.add(this.login());
+			}
+			if(target.equals("Consulta")) {
+				this.add(this.tabla());
+			}
+			if(target.equals("Alta")) {
+				this.add(this.alta());
+			}
+			if(target.equals("Baja")) {
+				this.add(this.baja());
+			}
+			if(target.equals("Acceder")) {
+				this.add(this.acceder());
+			}
+			if(target.equals("Olvidar")) {
+				this.add(this.olvidar());
+			}
+			if(target.equals("Crear")) {
+				this.add(this.crear());
 			}
 			
 			this.repaint();

@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class BotonLoco extends JFrame{
@@ -68,6 +69,8 @@ public class BotonLoco extends JFrame{
                 float g = rand.nextFloat();
                 float b = rand.nextFloat();
                 
+                Color randomColor = new Color(r, g, b);
+                
                 random.setSize(width, height);
                 random.setLocation(x, y);
                 random.setHorizontalAlignment(JLabel.CENTER);
@@ -75,9 +78,17 @@ public class BotonLoco extends JFrame{
                 random.setFont(new Font("Arial", Font.BOLD, 14)); 
                 random.setForeground(Color.WHITE);
 
+                random.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, "Color: " + randomColor.toString(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                });
+
                 registro.add(random);
-                
-                // Actualizar el panel
+                registro.revalidate();
+                registro.repaint();
+                registro.add(random);
                 registro.revalidate();
                 registro.repaint();
 				}

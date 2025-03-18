@@ -13,6 +13,7 @@ public class Main {
 		//GraphicsMario2 mario2 = new GraphicsMario2("Mario");
 		//-------------Login y ventana separados para actividad de 12/03/2025---------------
 		//Registro regis = new Registro("Registro");
+		BotonLoco boton = new BotonLoco("Boton Loquito");
 	}
 
 }

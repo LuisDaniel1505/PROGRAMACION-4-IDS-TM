@@ -77,7 +77,7 @@ public class ProgramaCompleto extends JFrame {
 	        //this.add(this.tabla());
 	        //this.add(this.alta());
 	        //this.add(this.crear());
-	        //----------------------------------------------------------------------------------
+	        //-------------------------------------------------------------------------------------------------------------------------------
 	        
 	        this.setVisible(true);
 	        JMenuBar barra = new JMenuBar();

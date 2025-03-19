@@ -28,9 +28,7 @@ public class BotonLoco extends JFrame{
 	
 	this.add(this.botonLoco());
 	this.repaint();
-	
-	//this.add(this.numeros());
-	this.repaint();
+
 	}
 	
 	public JPanel botonLoco() {
@@ -81,13 +79,18 @@ public class BotonLoco extends JFrame{
                 random.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(null, "Color: " + randomColor.toString(), "Información", JOptionPane.INFORMATION_MESSAGE);
+                        int respuesta = JOptionPane.showConfirmDialog(null, "Color: " + randomColor.toString() +"\n"+"¿Quieres eliminar este botón?", "Confirmación", 
+                            JOptionPane.YES_NO_OPTION
+                        );
+
+                        if (respuesta == JOptionPane.YES_OPTION) {
+                            registro.remove(random);
+                            registro.revalidate();
+                            registro.repaint();
+                        }
                     }
                 });
 
-                registro.add(random);
-                registro.revalidate();
-                registro.repaint();
                 registro.add(random);
                 registro.revalidate();
                 registro.repaint();

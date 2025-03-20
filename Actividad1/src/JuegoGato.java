@@ -89,7 +89,7 @@ public class JuegoGato extends JFrame {
 		
 		btnNewButton = new JButton("");
 		panel.add(btnNewButton);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -103,14 +103,14 @@ public class JuegoGato extends JFrame {
 					btnNewButton.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton.setText(player);
-				btnNewButton.setEnabled(false);
+				btnNewButton.setDisabledIcon(null);
 				verificar();
 			}
 		});
 		
 		btnNewButton_1 = new JButton("");
 		panel.add(btnNewButton_1);
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -124,14 +124,14 @@ public class JuegoGato extends JFrame {
 					btnNewButton_1.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton_1.setText(player);
-				btnNewButton_1.setEnabled(false);
+				btnNewButton_1.setDisabledIcon(null);
 				verificar();
 			}
 		});
 		
 		btnNewButton_2 = new JButton("");
 		panel.add(btnNewButton_2);
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -145,7 +145,7 @@ public class JuegoGato extends JFrame {
 					btnNewButton_2.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton_2.setText(player);
-				btnNewButton_2.setEnabled(false);
+				btnNewButton_2.setDisabledIcon(null);
 				verificar();
 
 			}
@@ -153,7 +153,7 @@ public class JuegoGato extends JFrame {
 		
 		btnNewButton_3 = new JButton("");
 		panel.add(btnNewButton_3);
-		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -167,14 +167,14 @@ public class JuegoGato extends JFrame {
 					btnNewButton_3.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton_3.setText(player);
-				btnNewButton_3.setEnabled(false);
+				btnNewButton_3.setDisabledIcon(null);
 				verificar();
 			}
 		});
 		
 		btnNewButton_4 = new JButton("");
 		panel.add(btnNewButton_4);
-		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -188,14 +188,14 @@ public class JuegoGato extends JFrame {
 					btnNewButton_4.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton_4.setText(player);
-				btnNewButton_4.setEnabled(false);
+				btnNewButton_4.setDisabledIcon(null);
 				verificar();
 			}
 		});
 		
 		btnNewButton_5 = new JButton("");
 		panel.add(btnNewButton_5);
-		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -209,14 +209,14 @@ public class JuegoGato extends JFrame {
 					btnNewButton_5.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton_5.setText(player);
-				btnNewButton_5.setEnabled(false);
+				btnNewButton_5.setDisabledIcon(null);
 				verificar();
 			}
 		});
 		
 		btnNewButton_6 = new JButton("");
 		panel.add(btnNewButton_6);
-		btnNewButton_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnNewButton_6.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -230,14 +230,14 @@ public class JuegoGato extends JFrame {
 					btnNewButton_6.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton_6.setText(player);
-				btnNewButton_6.setEnabled(false);
+				btnNewButton_6.setDisabledIcon(null);
 				verificar();
 			}
 		});
 		
 		btnNewButton_7 = new JButton("");
 		panel.add(btnNewButton_7);
-		btnNewButton_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		btnNewButton_7.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -251,14 +251,11 @@ public class JuegoGato extends JFrame {
 					btnNewButton_7.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton_7.setText(player);
-				btnNewButton_7.setEnabled(false);
+				btnNewButton_7.setDisabledIcon(null);
 				verificar();
 			}
 		});
 		
-		btnNewButton_8 = new JButton("");
-		panel.add(btnNewButton_8);
-		btnNewButton_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		
 		panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 192, 203));
@@ -273,6 +270,9 @@ public class JuegoGato extends JFrame {
 	    marcadorO.setFont(new Font("Tahoma", Font.BOLD, 14));
 	    panel_2.add(marcadorO);
 	
+	    btnNewButton_8 = new JButton("");
+	    panel.add(btnNewButton_8);
+	    btnNewButton_8.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		btnNewButton_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String player = "X";
@@ -286,7 +286,7 @@ public class JuegoGato extends JFrame {
 					btnNewButton_8.setIcon(new ImageIcon("imagenes/vegeta1.png"));
 				}
 				btnNewButton_8.setText(player);
-				btnNewButton_8.setEnabled(false);
+				btnNewButton_8.setDisabledIcon(null);
 				verificar();
 			}
 		});
@@ -358,6 +358,19 @@ public class JuegoGato extends JFrame {
 	        actualizarMarcador(btnNewButton_2.getText());
 	        quitarBotones();
 	    }
+	    if (!btnNewButton.getText().isEmpty() &&
+	        !btnNewButton_1.getText().isEmpty() &&
+	        !btnNewButton_2.getText().isEmpty() &&
+	        !btnNewButton_3.getText().isEmpty() &&
+            !btnNewButton_4.getText().isEmpty() &&
+	        !btnNewButton_5.getText().isEmpty() &&
+	        !btnNewButton_6.getText().isEmpty() &&
+	        !btnNewButton_7.getText().isEmpty() &&
+	        !btnNewButton_8.getText().isEmpty()) {
+	            
+	            JOptionPane.showMessageDialog(this, "No hay más movimientos posibles.");
+	            reiniciarTablero(); 
+	        }
 	    
 	}
 	private void quitarBotones() {

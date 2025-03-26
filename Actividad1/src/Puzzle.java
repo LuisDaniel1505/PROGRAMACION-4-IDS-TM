@@ -22,7 +22,7 @@ public class Puzzle extends JFrame {
     private JPanel contentPane;
     private JPanel panel;
     private JButton[] botones = new JButton[16];
-    
+    Cronometro cronometro = new Cronometro();
     /**
      * Launch the application.
      */
@@ -226,7 +226,6 @@ public class Puzzle extends JFrame {
         panel_2.setBackground(new Color(87,64,124));
         contentPane.add(panel_2);
         panel_2.setLayout(null);
-        Cronometro cronometro = new Cronometro();
         cronometro.setBounds(41, 0, 342, 118);
         panel_2.add(cronometro);
         
@@ -245,9 +244,6 @@ public class Puzzle extends JFrame {
         	}
         });
  
-        
-        
-        
         botones[0].putClientProperty("id", "1");
         botones[1].putClientProperty("id", "2");
         botones[2].putClientProperty("id", "3");
@@ -335,6 +331,7 @@ public class Puzzle extends JFrame {
         }
         if (gano && botones[15].getClientProperty("id").equals("0")) {
             JOptionPane.showMessageDialog(null, "¡Ganaste!");
+            cronometro.pararCronometro();
         }
     }
 

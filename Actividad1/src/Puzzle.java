@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 
+
 public class Puzzle extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -53,7 +54,7 @@ public class Puzzle extends JFrame {
         contentPane.setLayout(null);
         
         panel = new JPanel();
-        panel.setBounds(29, 258, 384, 342);
+        panel.setBounds(26, 201, 384, 342);
         panel.setBackground(new Color(87,64,124));
         contentPane.add(panel);
         panel.setLayout(new GridLayout(4, 4, 10, 10));
@@ -203,42 +204,49 @@ public class Puzzle extends JFrame {
         botones[15] = btnNewButton_15;
         
         JPanel panel_1 = new JPanel();
-        panel_1.setBounds(5, 5, 426, 253);
+        panel_1.setBounds(5, 5, 426, 197);
         panel_1.setBackground(new Color(87,64,124));
         contentPane.add(panel_1);
         panel_1.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("Puzzle");
-        lblNewLabel.setFont(new Font("Segoe Print", Font.PLAIN, 90));
+        lblNewLabel.setFont(new Font("Segoe Print", Font.PLAIN, 70));
         lblNewLabel.setForeground(new Color(255, 255, 255));
-        lblNewLabel.setBounds(66, 81, 309, 106);
+        lblNewLabel.setBounds(145, 22, 309, 106);
         panel_1.add(lblNewLabel);
         
         JLabel lblNewLabel_1 = new JLabel("15");
         lblNewLabel_1.setForeground(Color.WHITE);
-        lblNewLabel_1.setFont(new Font("Maiandra GD", Font.PLAIN, 99));
-        lblNewLabel_1.setBounds(157, 0, 108, 131);
+        lblNewLabel_1.setFont(new Font("Maiandra GD", Font.PLAIN, 70));
+        lblNewLabel_1.setBounds(60, 32, 108, 86);
         panel_1.add(lblNewLabel_1);
+        
+        JPanel panel_2 = new JPanel();
+        panel_2.setBounds(5, 543, 426, 118);
+        panel_2.setBackground(new Color(87,64,124));
+        contentPane.add(panel_2);
+        panel_2.setLayout(null);
+        Cronometro cronometro = new Cronometro();
+        cronometro.setBounds(41, 0, 342, 118);
+        panel_2.add(cronometro);
         
         Image iconR = new ImageIcon("Puzzle15/reiniciar.png").getImage().getScaledInstance(900, 500, Image.SCALE_SMOOTH);
         ImageIcon usuarioIconR = new ImageIcon(iconR);
         JButton btnNewButton_16 = new JButton(usuarioIconR);
-        btnNewButton_16.setBounds(0, 185, 161, 57);
+        btnNewButton_16.setBounds(-6, 129, 161, 57);
         btnNewButton_16.setBorderPainted(false);
         btnNewButton_16.setContentAreaFilled(false);
         btnNewButton_16.setFocusPainted(false);
         panel_1.add(btnNewButton_16);
-
         btnNewButton_16.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                barajarTablero();
-            }
+        	public void actionPerformed(ActionEvent e) {
+        		barajarTablero();
+        		cronometro.reiniciarCronometro();
+        	}
         });
+ 
         
-        JPanel panel_2 = new JPanel();
-        panel_2.setBounds(5, 601, 426, 60);
-        panel_2.setBackground(new Color(87,64,124));
-        contentPane.add(panel_2);
+        
         
         botones[0].putClientProperty("id", "1");
         botones[1].putClientProperty("id", "2");
@@ -315,6 +323,157 @@ public class Puzzle extends JFrame {
             panel.add(botones[k]);
         }
         panel.revalidate();
+        ganador();
         panel.repaint();
     }
+    private void ganador() {
+        boolean gano = true;
+        for (int i = 0; i < 15; i++) {
+            if (!botones[i].getClientProperty("id").equals(String.valueOf(i + 1))) {
+                gano = false;
+            }
+        }
+        if (gano && botones[15].getClientProperty("id").equals("0")) {
+            JOptionPane.showMessageDialog(null, "¡Ganaste!");
+        }
+    }
+
+    public void pausar(){
+    	for (int k = 0; k < botones.length; k++) {
+            botones[k].setEnabled(false);
+        }
+
+    }
+    public void reanudar() {
+    	for (int k = 0; k < botones.length; k++) {
+            botones[k].setEnabled(true);
+        }
+    }
+    //Clase para cronometro creditos: https://gist.github.com/jujogracu/3069429
+    public class Cronometro extends JPanel implements Runnable, ActionListener {
+        private JLabel tiempo;
+        private Thread hilo;
+        private boolean cronometroActivo;
+        private boolean pausar;
+
+        private int minutos = 0, segundos = 0, milesimas = 0;
+
+        public Cronometro() {
+            setLayout(null);
+            setBackground(new Color(87,64,124));
+            setBounds(10, 10, 300, 100); 
+
+            tiempo = new JLabel("00:00:000");
+            tiempo.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+            tiempo.setForeground(Color.WHITE);
+            tiempo.setBounds(110, 10, 440, 50);
+            add(tiempo);
+ 
+            Image iconI = new ImageIcon("Puzzle15/iniciar.png").getImage().getScaledInstance(900, 500, Image.SCALE_SMOOTH);
+            ImageIcon usuarioIconI = new ImageIcon(iconI);
+            JButton btnIniciar = new JButton(usuarioIconI);
+            btnIniciar.setBounds(10, 60, 161, 57);
+            btnIniciar.setBorderPainted(false);
+            btnIniciar.setContentAreaFilled(false);
+            btnIniciar.setFocusPainted(false);
+            btnIniciar.addActionListener(this);
+            btnIniciar.putClientProperty("id", "Iniciar");
+            add(btnIniciar);
+
+            Image iconD = new ImageIcon("Puzzle15/detener.png").getImage().getScaledInstance(900, 500, Image.SCALE_SMOOTH);
+            ImageIcon usuarioIconD = new ImageIcon(iconD);
+            JButton btnDetener = new JButton(usuarioIconD);
+            btnDetener.setBounds(180, 60, 161, 57);
+            btnDetener.setBorderPainted(false);
+            btnDetener.setContentAreaFilled(false);
+            btnDetener.setFocusPainted(false);
+            btnDetener.addActionListener(this);
+            btnDetener.putClientProperty("id", "Detener");
+            add(btnDetener);
+        }
+
+        public void run() {
+            cronometroActivo = true;
+            try {
+                while (cronometroActivo) {
+                    if (!pausar) {
+                        Thread.sleep(4);
+                        milesimas += 4;
+                        if (milesimas >= 1000) {
+                            milesimas = 0;
+                            segundos++;
+                            if (segundos >= 60) {
+                                segundos = 0;
+                                minutos++;
+                            }
+                        }
+                        String min = (minutos < 10) ? "0" + minutos : String.valueOf(minutos);
+                        String seg = (segundos < 10) ? "0" + segundos : String.valueOf(segundos);
+                        String mil;
+                        if (milesimas < 10)
+                            mil = "00" + milesimas;
+                        else if (milesimas < 100)
+                            mil = "0" + milesimas;
+                        else
+                            mil = String.valueOf(milesimas);
+                        
+                        tiempo.setText(min + ":" + seg + ":" + mil);
+                    } else {
+                        Thread.sleep(10);
+                    }
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Error en el cronómetro: " + e.getMessage());
+            }
+        }
+
+        public void actionPerformed(ActionEvent evt) {
+            JButton btn = (JButton) evt.getSource();
+            String command = (String) btn.getClientProperty("id");
+            switch (command) {
+                case "Iniciar":
+                    iniciarCronometro();
+                    break;
+                case "Reiniciar":
+                    reiniciarCronometro();
+                    break;
+                case "Detener":
+                    pararCronometro();
+                    break;
+            }
+        }
+
+
+        public void iniciarCronometro() {
+            if (hilo == null || !hilo.isAlive()) {
+                pausar = false;
+                cronometroActivo = true;
+                hilo = new Thread(this);
+                hilo.start();
+            } else {
+                pausar = false;
+                reanudar();
+
+            }
+        }
+
+        public void pararCronometro() {
+            pausar = true;
+            pausar();
+            
+        }
+
+        public void reiniciarCronometro() {
+            cronometroActivo = false;
+            pausar = false;
+            hilo = null;
+            minutos = 0;
+            segundos = 0;
+            milesimas = 0;
+            tiempo.setText("00:00:000");
+            reanudar();
+        }
+    }
 }
+
+

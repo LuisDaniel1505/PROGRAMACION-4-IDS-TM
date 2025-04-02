@@ -81,7 +81,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         panelHerramientas.add(btnBorrador);
         btnBorrador.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                colorActual = Color.WHITE;
+                tool = 7;
             }
         });
 
@@ -146,7 +146,6 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         btnLimpiar.setForeground(Color.WHITE);
         btnLimpiar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	panelDibujo.removeAll();
             	puntos.clear();
             	figuras.clear();
             	ListaDePuntos.clear();
@@ -353,6 +352,11 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseDragged(MouseEvent e) {
+    	if (tool == 7) {
+    		Figura f = new Figura(e.getX(), e.getY(), 80, 80, Color.white, grosorActual, "Borrador");
+    		figuras.add(f);
+    		panelDibujo.repaint();
+    	}
         if (tool == 1) {
             puntos.add(new MyPoint(e.getX(), e.getY(), colorActual, grosorActual));
             panelDibujo.repaint();
@@ -404,11 +408,15 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
 
                 if (f.tipo.equals("Rectangulo")) {
                     g2.drawRect(f.x, f.y, f.w, f.h);
-                } else if (f.tipo.equals("Circulo")) {
+                } 
+                else if (f.tipo.equals("Circulo")) {
                     g2.drawOval(f.x, f.y, f.w, f.h);
                 }
-                if (f.tipo.equals("Linea")) {
+                else if (f.tipo.equals("Linea")) {
                     g2.drawLine(f.x, f.y, f.w, f.h); 
+                }
+                if (f.tipo.equals("Borrador")) {
+                	g2.clearRect(f.x, f.y, f.w, f.h);
                 }
             }
 

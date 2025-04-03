@@ -25,6 +25,8 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     public static int grosorActual = 10;
     private int tool = 1;
     private int xInicio, yInicio, xFin, yFin;
+    private int tam1=0, tam2=0;
+    JLabel lblNewLabel;
     
 
     private ArrayList<MyPoint> puntos = new ArrayList<MyPoint>();
@@ -84,12 +86,20 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 tool = 7;
             }
         });
-
-        JButton btnLineaRecta = new JButton("Línea Recta");
-        panelHerramientas.add(btnLineaRecta);
-
-        JButton btnLineaManoAlzada = new JButton("Línea a Mano Alzada");
-        panelHerramientas.add(btnLineaManoAlzada);
+                
+        JSlider grosor = new JSlider(1, 50, 10);
+        grosor.setMajorTickSpacing(10);
+        grosor.addChangeListener(new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent e) {
+                grosorActual = grosor.getValue();
+                panelDibujo.repaint();
+             }
+        });
+                        
+        JLabel grosorTrazo = new JLabel("Grosor de Trazo:");
+        panelHerramientas.add(grosorTrazo);
+        panelHerramientas.add(grosor);
 
         JLabel lblFormas = new JLabel("Formas Geométricas:");
         panelHerramientas.add(lblFormas);
@@ -101,6 +111,14 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 tool = 2;
             }
         });
+        
+        JButton btnRectanguloR = new JButton("Rectangulo con relleno");
+        btnRectanguloR.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tool = 8;
+            }
+        });
+        panelHerramientas.add(btnRectanguloR);
 
         JButton btnCirculo = new JButton("Círculo");
         panelHerramientas.add(btnCirculo);
@@ -109,12 +127,14 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 tool = 3;
             }
         });
-
-        JButton btnOvalo = new JButton("Óvalo");
-        panelHerramientas.add(btnOvalo);
-
-        JButton btnTriangulo = new JButton("Triángulo");
-        panelHerramientas.add(btnTriangulo);
+        
+        JButton btnCirculor = new JButton("Circulo con relleno");
+        panelHerramientas.add(btnCirculor);
+        btnCirculor.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tool = 9;
+            }
+        });
 
         JButton btnLinea = new JButton("Línea");
         panelHerramientas.add(btnLinea);    
@@ -123,23 +143,43 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 tool = 6;
             }
         });
-
-        JButton btnPoligono = new JButton("Polígono");
-        panelHerramientas.add(btnPoligono);
-
-        JLabel grosorTrazo = new JLabel("Grosor de Trazo:");
-        panelHerramientas.add(grosorTrazo);
-
-        JSlider grosor = new JSlider(1, 50, 10);
-        grosor.setMajorTickSpacing(10);
-        grosor.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                grosorActual = grosor.getValue();
-                panelDibujo.repaint();
-            }
+        
+        JButton btnTriangulo = new JButton("Triángulo");
+        panelHerramientas.add(btnTriangulo);
+        
+        JLabel lblTam = new JLabel("Tamaño:");
+        panelHerramientas.add(lblTam);
+        
+        JPanel panel = new JPanel();
+        panelHerramientas.add(panel);
+        panel.setLayout(new GridLayout(0, 3, 0, 0));
+        
+        JButton aumentar = new JButton("+");
+        aumentar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tam1+=10;
+				tam2+=10;
+				lblNewLabel.setText("       "+tam1);
+			}	
         });
-        panelHerramientas.add(grosor);
+        panel.add(aumentar);
+
+        lblNewLabel = new JLabel("       "+tam1);
+        panel.add(lblNewLabel);
+        
+        JButton disminuir = new JButton("-");
+        disminuir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(tam1>0) {
+					tam1-=10;
+					tam2-=10;
+					lblNewLabel.setText("       "+tam1);					
+				}
+			}	
+        });
+        panel.add(disminuir);
 
         JButton btnLimpiar = new JButton("Limpiar Lienzo");
         btnLimpiar.setBackground(Color.RED);
@@ -312,9 +352,13 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 tipoFigura = "Rectangulo";
             } else if (tool == 3) {
                 tipoFigura = "Circulo";
+            } else if (tool == 8) {
+            	tipoFigura = "RectanguloRelleno";
+            } else if (tool == 9) {
+            	tipoFigura = "CirculoRelleno";
             }
             
-            Figura f = new Figura(e.getX(), e.getY(), 80, 80, colorActual, grosorActual, tipoFigura);
+            Figura f = new Figura(e.getX(), e.getY(), tam1, tam2, colorActual, grosorActual, tipoFigura);
             figuras.add(f);
             panelDibujo.repaint();
         }
@@ -415,8 +459,14 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 else if (f.tipo.equals("Linea")) {
                     g2.drawLine(f.x, f.y, f.w, f.h); 
                 }
-                if (f.tipo.equals("Borrador")) {
+                else if (f.tipo.equals("Borrador")) {
                 	g2.clearRect(f.x, f.y, f.w, f.h);
+                }
+                else if (f.tipo.equals("RectanguloRelleno")) {
+                	g2.fillRect(f.x, f.y, f.w, f.h);
+                }
+                else if (f.tipo.equals("CirculoRelleno")) {
+                	g2.fillOval(f.x, f.y, f.w, f.h);
                 }
             }
 

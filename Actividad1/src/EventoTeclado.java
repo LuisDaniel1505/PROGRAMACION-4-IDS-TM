@@ -14,6 +14,8 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EventoTeclado extends JFrame implements KeyListener{
 
@@ -66,10 +68,18 @@ public class EventoTeclado extends JFrame implements KeyListener{
 		panel.setBounds(5, 539, 426, 43);
 		contentPane.add(panel);
 		JButton btnNewButton = new JButton("Reiniciar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { 
+				 x=200;
+				 y=200;
+				 panel_2.requestFocusInWindow();
+				 panel_2.repaint();
+			}
+		});
 		panel.add(btnNewButton);
 		
-		this.addKeyListener(this);
-	    this.setFocusable(true);
+		panel_2.addKeyListener(this);
+		panel_2.setFocusable(true); //Se modificó el foco para que sea solo el panel_2 en vez de todo el frame
 	}
 	
 	class PaintPanel extends JPanel {
@@ -95,21 +105,24 @@ public class EventoTeclado extends JFrame implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());
-		if(e.getKeyCode()==87) {
-			y-=5;
-		}
-		if(e.getKeyCode()==83) {
-			y+=5;
-		}
-		if(e.getKeyCode()==65) {
-			x-=5;
-		}
-		if(e.getKeyCode()==68) {
-			x+=5;
-		}
-		panel_2.repaint();
+	    int alturaCubo = 30;
+	    int anchoCubo = 30;
+	    int movimiento = 5;
+
+	    if (e.getKeyCode() == 87 && y - movimiento >= 0) { 
+	        y -= 5;
+	    }
+	    if (e.getKeyCode() == 83 && y + alturaCubo + movimiento <= panel_2.getHeight()) { 
+	        y += 5;
+	    }
+	    if (e.getKeyCode() == 65 && x - movimiento >= 0) { 
+	        x -= 5;
+	    }
+	    if (e.getKeyCode() == 68 && x + anchoCubo + movimiento <= panel_2.getWidth()) {
+	        x += 5;
+	    }
+
+	    panel_2.repaint();
 	}
 	
 	@Override

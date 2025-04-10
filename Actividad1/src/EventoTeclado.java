@@ -1,15 +1,19 @@
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JButton;
 
 public class EventoTeclado extends JFrame implements KeyListener{
 
@@ -17,6 +21,11 @@ public class EventoTeclado extends JFrame implements KeyListener{
 	private JPanel contentPane;
 	private PaintPanel panel_2;
 	private Player player;
+	Timer timer, timer2;
+	private int lastpress=0;
+	JLabel lblNewLabel;
+	private int decimas = 0;
+	private int segundos = 0;
 	private ArrayList<Player> obstaculos = new ArrayList<Player>();
 
 	/**
@@ -57,7 +66,8 @@ public class EventoTeclado extends JFrame implements KeyListener{
 		panel_1.setBounds(5, 5, 426, 51);
 		contentPane.add(panel_1);
 		
-		JLabel lblNewLabel = new JLabel("0:00");
+		lblNewLabel = new JLabel("0:0");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel);
 		
 		panel_2 = new PaintPanel();
@@ -66,15 +76,51 @@ public class EventoTeclado extends JFrame implements KeyListener{
 		contentPane.add(panel_2);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(5, 539, 426, 43);
+		panel.setBounds(5, 520, 426, 62);
 		contentPane.add(panel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Presiona \"R\" para reiniciar");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		panel.add(lblNewLabel_1);
+		JButton btnNewButton = new JButton("Reiniciar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				player.x=200;
+		    	player.y=200;
+		    	panel_2.requestFocusInWindow();
+		    	panel_2.repaint();
+		    	lastpress=0;
+		    	timer.stop();
+		    	timer2.stop();
+		    	lblNewLabel.setText("0:0");
+		    	segundos=0;
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		panel.add(btnNewButton);
 		
 		panel_2.addKeyListener(this);
 		panel_2.setFocusable(true); //Se modificó el foco para que sea solo el panel_2 en vez de todo el frame
+		
+		ActionListener taskPerformer = new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        decimas++;
+		        if (decimas >= 10) {
+		            segundos++;
+		            decimas = 0;
+		        }
+		        String tiempo = String.format("%02d:%d", segundos, decimas);
+		        lblNewLabel.setText(tiempo);
+		    }
+		};
+		timer = new Timer(100, taskPerformer); 
+		
+		ActionListener movimiento = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				update();
+				panel_2.repaint();
+			}
+		};
+		timer2 = new Timer(4,movimiento);
 		
 	}
 	
@@ -95,7 +141,7 @@ public class EventoTeclado extends JFrame implements KeyListener{
             
             for (Player pared : obstaculos) {
             	g2.setColor(pared.c);
-            	g2.fillRect(pared.x, pared.y, pared.w-5, pared.h-5);
+            	g2.fillRect(pared.x, pared.y, pared.w, pared.h);
             }
         }
     }
@@ -108,45 +154,42 @@ public class EventoTeclado extends JFrame implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-	    int movimiento = 5;
-	    int futuraX = player.x;
-	    int futuraY = player.y;
-
-	    if (e.getKeyCode() == 87 && player.y - movimiento >= 0) { 
-	        futuraY -= movimiento;
-	    } 
-	    if (e.getKeyCode() == 83 && player.y + player.h + movimiento <= panel_2.getHeight()) { 
-	        futuraY += movimiento;
-	    }
-	    if (e.getKeyCode() == 65 && player.x - movimiento >= 0) { 
-	        futuraX -= movimiento;
-	    }
-	    if (e.getKeyCode() == 68 && player.x + player.w + movimiento <= panel_2.getWidth()) {
-	        futuraX += movimiento;
-	    }
-
-	    boolean colisiona = false;
-	    for (Player pared : obstaculos) {
-	        if (new Player(futuraX, futuraY, player.w, player.h, player.c).colision(pared)) {
-	            colisiona = true;
-	        }
-	    }
-	    if (!colisiona) {
-	        player.x = futuraX;
-	        player.y = futuraY;
-	    }
-	    if(colisiona) {
-	    	System.out.println("Hubo una colision");
-	    }
-
-	    
-	    if (e.getKeyCode() == 82) {
-	    	player.x=200;
-	    	player.y=200;
-	    	panel_2.requestFocusInWindow();
-	    	panel_2.repaint();
-	    }
+		timer.start();
+	    timer2.start();
+	    lastpress = e.getKeyCode();
+	    update();
 	    panel_2.repaint();
+	}
+	
+	public void update() {
+		int movimiento = 2; 
+        int futuraX = player.x;
+        int futuraY = player.y;
+
+        if (lastpress == 87 && player.y - movimiento >= 0) { 
+            futuraY -= movimiento;
+        } else if (lastpress == 83 && player.y + player.h + movimiento <= panel_2.getHeight()) {  
+            futuraY += movimiento;
+        } else if (lastpress == 65 && player.x - movimiento >= 0) {  
+            futuraX -= movimiento;
+        } else if (lastpress == 68 && player.x + player.w + movimiento <= panel_2.getWidth()) { 
+            futuraX += movimiento;
+        }
+
+        boolean colisiona = false;
+        for (Player pared : obstaculos) {
+            if (new Player(futuraX, futuraY, player.w, player.h, player.c).colision(pared)) {
+                colisiona = true;
+            }
+        }
+        
+        if (!colisiona) {
+            player.x = futuraX;
+            player.y = futuraY;
+        } else {
+            lastpress = 0;
+            timer2.stop();
+        }
 	}
 
 	
